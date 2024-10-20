@@ -2,7 +2,6 @@
 	single linked list merge
 	This problem requires you to merge two ordered singly linked lists into one ordered singly linked list
 */
-// I AM NOT DONE
 
 use std::fmt::{self, Display, Formatter};
 use std::ptr::NonNull;
@@ -29,13 +28,13 @@ struct LinkedList<T> {
     end: Option<NonNull<Node<T>>>,
 }
 
-impl<T> Default for LinkedList<T> {
+impl<T: Ord + Clone> Default for LinkedList<T> {
     fn default() -> Self {
         Self::new()
     }
 }
 
-impl<T> LinkedList<T> {
+impl<T: Ord + Clone> LinkedList<T> {
     pub fn new() -> Self {
         Self {
             length: 0,
@@ -72,11 +71,45 @@ impl<T> LinkedList<T> {
 	pub fn merge(list_a:LinkedList<T>,list_b:LinkedList<T>) -> Self
 	{
 		//TODO
-		Self {
-            length: 0,
-            start: None,
-            end: None,
+        let mut merged_list = LinkedList::new();
+
+        // Create pointers to traverse both lists
+        let mut current_a = list_a.start;
+        let mut current_b = list_b.start;
+    
+        // Traverse both lists and add the smaller element to the merged list
+        while current_a.is_some() || current_b.is_some() {
+            match (current_a, current_b) {
+                (Some(ptr_a), Some(ptr_b)) => {
+                    unsafe {
+                        // Compare values and add the smaller one to the merged list
+                        if (*ptr_a.as_ptr()).val <= (*ptr_b.as_ptr()).val {
+                            merged_list.add((*ptr_a.as_ptr()).val.clone());
+                            current_a = (*ptr_a.as_ptr()).next; // Move to the next node in list_a
+                        } else {
+                            merged_list.add((*ptr_b.as_ptr()).val.clone());
+                            current_b = (*ptr_b.as_ptr()).next; // Move to the next node in list_b
+                        }
+                    }
+                }
+                (Some(ptr_a), None) => {
+                    unsafe {
+                        merged_list.add((*ptr_a.as_ptr()).val.clone());
+                        current_a = (*ptr_a.as_ptr()).next;
+                    }
+                }
+                (None, Some(ptr_b)) => {
+                    unsafe {
+                        merged_list.add((*ptr_b.as_ptr()).val.clone());
+                        current_b = (*ptr_b.as_ptr()).next;
+                    }
+                }
+                (None, None) => break, // Both lists are fully traversed
+            }
         }
+    
+        merged_list
+
 	}
 }
 

@@ -24,4 +24,4 @@
 | smart_pointers x       | §15, §16.3          |
 | macros        x        | §19.6               |
 | clippy        x        | §21.4               |
-| conversions            | n/a                 |
+| conversions   x        | n/a                 |
