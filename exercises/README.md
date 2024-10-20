@@ -16,12 +16,12 @@
 | options       x        | §10.1               |
 | error_handling x       | §9                  |
 | generics      x        | §10                 |
-| traits                 | §10.2               |
-| tests                  | §11.1               |
-| lifetimes              | §10.3               |
-| iterators              | §13.2-4             |
-| threads                | §16.1-3             |
-| smart_pointers         | §15, §16.3          |
-| macros                 | §19.6               |
-| clippy                 | §21.4               |
+| traits        x        | §10.2               |
+| tests         x        | §11.1               |
+| lifetimes     x        | §10.3               |
+| iterators     x        | §13.2-4             |
+| threads       x        | §16.1-3             |
+| smart_pointers x       | §15, §16.3          |
+| macros        x        | §19.6               |
+| clippy        x        | §21.4               |
 | conversions            | n/a                 |
